@@ -74,6 +74,7 @@ Qt3DCore::QEntity *createScene(My3DWindow *view){
     torus->setSlices(16);
     torus->setRings(32);
     Qt3DExtras::QPhongMaterial *torusMaterial = new Qt3DExtras::QPhongMaterial(torus);
+    // Цвет диффузного отражения - красный
     torusMaterial->setDiffuse(Qt::red);
     Qt3DCore::QTransform *torusTransform = new Qt3DCore::QTransform(torus);
 
@@ -87,11 +88,13 @@ Qt3DCore::QEntity *createScene(My3DWindow *view){
     Qt3DCore::QEntity *cubEntity = new Qt3DCore::QEntity(resultEntity);
     Qt3DExtras::QCuboidMesh *cub = new Qt3DExtras::QCuboidMesh(cubEntity);
     Qt3DCore::QTransform * cubTransform = new Qt3DCore::QTransform(cubEntity);
+
     Qt3DExtras::QPhongMaterial *cubMaterial = new Qt3DExtras::QPhongMaterial(cubEntity);
     cub->setXExtent(8.0f);
     cub->setYExtent(8.0f);
     cub->setZExtent(8.0f);
     OrbitTransformController *controller2 = RotationStart(cubTransform, -14.0f, 10.0f, 8.0f);
+    // Цвет отражения фонового излучения - красный
     cubMaterial->setAmbient(Qt::red);
     cubEntity->addComponent(cub);
     cubEntity->addComponent(cubTransform);
@@ -103,6 +106,7 @@ Qt3DCore::QEntity *createScene(My3DWindow *view){
     Qt3DCore::QTransform *coneTransform = new Qt3DCore::QTransform(coneEntity);
     Qt3DExtras::QPhongMaterial *coneMaterial = new Qt3DExtras::QPhongMaterial(coneEntity);
     OrbitTransformController *controller3 = RotationStart(coneTransform, 15.0f, -5.0f, -3.0f);
+    // Цвет зеркального отражения - красный
     coneMaterial->setSpecular(Qt::red);
     cone->setBottomRadius(5.0f);
     cone->setLength(10.0f);
@@ -112,7 +116,7 @@ Qt3DCore::QEntity *createScene(My3DWindow *view){
 
     view->setControllers(controller1, controller2, controller3);
 
-    //LIGHT 1
+    //LIGHT 1 зеленый
     Qt3DCore::QEntity *lightEntity1 = new Qt3DCore::QEntity(resultEntity);
     Qt3DCore::QTransform *lightTransform1 = new Qt3DCore::QTransform(lightEntity1);
     Qt3DRender::QPointLight *pointLight1 = new Qt3DRender::QPointLight(lightEntity1);
@@ -121,7 +125,7 @@ Qt3DCore::QEntity *createScene(My3DWindow *view){
     lightEntity1->addComponent(pointLight1);
     lightEntity1->addComponent(lightTransform1);
 
-    //LIGHT 2
+    //LIGHT 2 розовый
     Qt3DCore::QEntity *lightEntity2 = new Qt3DCore::QEntity(resultEntity);
     Qt3DCore::QTransform *lightTransform2 = new Qt3DCore::QTransform(lightEntity2);
     Qt3DRender::QPointLight *pointLight2 = new Qt3DRender::QPointLight(lightEntity2);
@@ -130,7 +134,7 @@ Qt3DCore::QEntity *createScene(My3DWindow *view){
     lightEntity2->addComponent(pointLight2);
     lightEntity2->addComponent(lightTransform2);
 
-    //LIGHT3
+    //LIGHT3 желтый
     Qt3DCore::QEntity *lightEntity3 = new Qt3DCore::QEntity(resultEntity);
     Qt3DCore::QTransform *lightTransform3 = new Qt3DCore::QTransform(lightEntity3);
     Qt3DRender::QPointLight *pointLight3 = new Qt3DRender::QPointLight(lightEntity3);
@@ -145,13 +149,14 @@ Qt3DCore::QEntity *createScene(My3DWindow *view){
 
 
 OrbitTransformController * RotationStart(Qt3DCore::QTransform *object, float x, float y, float z){
+    // создание контроллера вращения
     OrbitTransformController *controller = new OrbitTransformController(object);
     controller->setTarget(object);
     controller->setRadius(x);
     controller->setX(x);
     controller->setY(y);
     controller->setZ(z);
-
+    // создание анимации для вращения
     QPropertyAnimation *RotateAnimation = new QPropertyAnimation(object);
     RotateAnimation->setTargetObject(controller);
     RotateAnimation->setPropertyName("angle");
