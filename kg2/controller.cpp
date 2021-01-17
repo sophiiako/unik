@@ -4,6 +4,8 @@
 
 void OrbitTransformController::setStopFlag(bool newFlag)
 {
+    // либо вращение по всем осям, либо стоп
+    // в любом случае возвращаем координатам их прежние сзначения
     stop = newFlag;
     prev = 'r';
     x = tempX;
@@ -13,6 +15,7 @@ void OrbitTransformController::setStopFlag(bool newFlag)
 
 void OrbitTransformController::turnX()
 {
+    // вращение по Х
     if(stop) stop = false;
     if (prev != 'x'){
         y = 0.0f;
@@ -24,6 +27,7 @@ void OrbitTransformController::turnX()
 
 void OrbitTransformController::turnY()
 {
+    // вращение по Y
     if(stop) stop = false;
     if (prev != 'y'){
         x = 0.0f;
@@ -35,6 +39,7 @@ void OrbitTransformController::turnY()
 
 void OrbitTransformController::turnZ()
 {
+    // вращение п Z
     if(stop) stop = false;
     if (prev != 'z'){
         y = 0.0f;
@@ -61,6 +66,7 @@ OrbitTransformController::OrbitTransformController(QObject *parent)
     prev = 'r';
 }
 
+// с помощью setX - setZ находим координаты, по которым будем вращать
 void OrbitTransformController::setX(float m_x)
 {
     x = m_x;
@@ -108,10 +114,12 @@ float OrbitTransformController::radius() const
 
 void OrbitTransformController::setAngle(float angle)
 {
+    if(!stop){
     if (!qFuzzyCompare(angle, m_angle)) {
         m_angle = angle;
         updateMatrix();
         emit angleChanged();
+    }
     }
 }
 
@@ -122,6 +130,7 @@ float OrbitTransformController::angle() const
 
 void OrbitTransformController::updateMatrix()
 {
+    // метод для вращения
     if (!stop){
     m_matrix.setToIdentity();
     m_matrix.rotate(m_angle, QVector3D(x, y, z));
