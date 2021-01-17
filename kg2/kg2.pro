@@ -1,4 +1,8 @@
 QT       += core gui
+QT       += 3dcore
+QT       += 3dlogic
+QT       += 3dextras
+QT       += 3dinput
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -9,14 +13,15 @@ CONFIG += c++11
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    controller.cpp \
     main.cpp \
-    mainwindow.cpp
+    my3dwindow.cpp
 
 HEADERS += \
-    mainwindow.h
+    controller.h \
+    my3dwindow.h
 
-FORMS += \
-    mainwindow.ui
+FORMS +=
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
