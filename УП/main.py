@@ -21,14 +21,14 @@ def drawingPixels(data, canvas, width, height):
        
        
 def main():                
-    im = Image.open('4.jpg') 
+    im = Image.open('6.jpg') 
     # список содержащий значения пикселей    
     pixels = list(im.getdata())
     image_width, image_height = im.size
 
     #showImageByPixels(pixels, image_width, image_height)
 
-    cluster = kMeansCluster(pixels, image_width, image_height,20, 5)
+    cluster = kMeansCluster(pixels, image_width, image_height,50)
     cluster.startClustering()
     result = cluster.getResult()
     showImageByPixels(result, image_width, image_height)
