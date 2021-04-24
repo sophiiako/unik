@@ -44,10 +44,10 @@ class kMeansCluster():
         # выбираем k разных центров кластеров случайным образом
         self.getRandomPointsForClusterCentroids()
         stop_it = False
-        t = 0
+        iterator = 0
         while not stop_it:
-            print('iteration %s...'%str(t))
-            t += 1
+            print('iteration %s...'%str(iterator))
+            iterator += 1
             # распределяем точки по кластерам
             stop_it = self.assignEachPointToCluster()
         self.cluster_done = True
@@ -67,8 +67,8 @@ class kMeansCluster():
             cluster_data = []
             random_index = random.randint(0,self.num_points-1)
             random_data = self.values[random_index]
-            for j in range(len(random_data)):
-                cluster_data.append(random_data[j])
+            for it_data in range(len(random_data)):
+                cluster_data.append(random_data[it_data])
             cluster_data.append(self.point_coordinates[random_index][0])
             cluster_data.append(self.point_coordinates[random_index][1])
             self.cluster_centroids.append(cluster_data)
@@ -144,8 +144,8 @@ class kMeansCluster():
             return []
         new_data = [0]*self.num_points
         for k in range(self.num_cluster):
-            for i in range(len(self.mark_for_each_point)):
-                if self.mark_for_each_point[i] == k:
+            for it_point in range(len(self.mark_for_each_point)):
+                if self.mark_for_each_point[it_point] == k:
                     if self.num_pixel_value == 2:
                         color_data = (int(self.cluster_centroids[k][0]), int(self.cluster_centroids[k][1]))
                     elif self.num_pixel_value == 3:
