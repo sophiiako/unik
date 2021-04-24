@@ -3,14 +3,13 @@ import random
 
 class kMeansCluster():
     
-    def __init__(self, values, width, height, num_cluster = 4, iterations = 2, only_color = False):
+    def __init__(self, values, width, height, num_cluster = 4, only_color = False):
         self.values = values
         self.width = width
         self.height = height
         self.num_points = len(values)
         self.mark_for_each_point = [0]*self.num_points
         self.num_cluster = num_cluster
-        self.iterations = iterations
         # num_pixel_value это количество значений пикселя, например в RGB - 3
         self.num_pixel_value = len(values[0])
         self.cluster_done = False
@@ -24,17 +23,17 @@ class kMeansCluster():
             
         
     def checkData(self):
-        # проверка на адекватность изображения
+        # проверка на адекватность массива изображения
         if type(self.values) != list:
             return 0
         for data in self.values:
             if (type(data) != tuple and type(data) != list) or len(data) < 2 or len(data) > 5:
                 return 0
         # проверка на остальные целочисленные значения
-        if type(self.width) != int or type(self.height) != int or type(self.iterations) != int or type(self.num_cluster) != int:
+        if type(self.width) != int or type(self.height) != int or type(self.num_cluster) != int:
             return 0
         
-        if self.width < 0 or self.height < 0 or self.iterations < 0 or self.num_cluster < 0:
+        if self.width < 0 or self.height < 0 or self.num_cluster < 0:
             return 0
         # проверка того что ширина и высота даны правельные
         if len(self.values) != self.width*self.height:
@@ -46,17 +45,19 @@ class kMeansCluster():
         if not self.checkData():
             print('Arguments are wrong. Can\'t clustering.')
             return 0
-        self.cluster_done = True
-        for t in range(self.iterations):
+        # выбираем k разных центров кластеров случайным образом
+        self.getRandomPointsForClusterCentroids()
+        #for t in range(self.iterations):
+        stop_it = False
+        t = 0
+        while not stop_it:
             print('iteration %s...'%str(t))
-            if t == 0:
-                # мы выбираем k разных центров кластеров случайным образом
-                self.getRandomPointsForClusterCentroids()
-            else:
-                # пересчитываем центроиды
-                self.recalculateClusterCentroids()
+            t += 1
             # распределяем точки по кластерам
             self.assignEachPointToCluster()
+            # пересчитываем центроиды
+            stop_it = self.recalculateClusterCentroids()
+        self.cluster_done = True
         return 1
     
     def imageDataToXY(self):
@@ -82,6 +83,7 @@ class kMeansCluster():
 
     def recalculateClusterCentroids(self):
         # итерация по всем кластерам
+        result_cetroids_difference = [0]*self.num_cluster
         for k in range(self.num_cluster):
             count_of_points_for_cluster = 0
             sums = [0]*self.num_axis
@@ -101,8 +103,22 @@ class kMeansCluster():
             if not count_of_points_for_cluster:
                 count_of_points_for_cluster = 1
             # пересчитываем цетроиду
+            not_changed = True
             for p in range(self.num_axis):
+                mean = sums[p]/count_of_points_for_cluster
+                try:
+                    if not (mean/self.cluster_centroids[k][p] < 1.04 and mean/self.cluster_centroids[k][p] > 0.96):
+                        not_changed = False
+                        print(mean/self.cluster_centroids[k][p])
+                except ZeroDivisionError:
+                    if mean != 0:
+                        not_changed = False
                 self.cluster_centroids[k][p] = sums[p]/count_of_points_for_cluster
+            if not_changed:
+                result_cetroids_difference[k] = 1
+        if not 0 in result_cetroids_difference:
+            return 1
+        return 0
     
     def assignEachPointToCluster(self):
         # итерация по всем точкам, чтобы распределить все точки по своим кластерам
