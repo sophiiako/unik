@@ -12,7 +12,6 @@ class kMeansCluster():
         self.num_cluster = num_cluster
         # num_pixel_value это количество значений пикселя, например в RGB - 3
         self.num_pixel_value = len(values[0])
-        self.cluster_done = False
         # axis это то что мы учитываем при кластеризации, в данном случае учитываются значения пикселя и координаты точки
         self.num_axis = len(values[0]) + 2
         self.imageDataToXY()
@@ -31,7 +30,7 @@ class kMeansCluster():
         
         if self.width < 0 or self.height < 0 or self.num_cluster < 0:
             return 0
-        # проверка того что ширина и высота даны правельные
+        # проверка того что ширина и высота даны правильные
         if len(self.values) != self.width*self.height:
             return 0
         
@@ -50,8 +49,8 @@ class kMeansCluster():
             iterator += 1
             # распределяем точки по кластерам
             stop_it = self.assignEachPointToCluster()
-        self.cluster_done = True
-        return 1
+        # вернуть выходную последовательность – кластеризированное изображение
+        return self.getResult()
     
     def imageDataToXY(self):
         # из последовательности значений пикселей берем координаты каждой точки
@@ -139,9 +138,6 @@ class kMeansCluster():
         return 0
             
     def getResult(self):
-        if not self.cluster_done:
-            print('Can\'t get image before clustering.')
-            return []
         new_data = [0]*self.num_points
         for k in range(self.num_cluster):
             for it_point in range(len(self.mark_for_each_point)):
@@ -152,9 +148,10 @@ class kMeansCluster():
                         color_data = (int(self.cluster_centroids[k][0]), int(self.cluster_centroids[k][1]), int(self.cluster_centroids[k][2]))
                     elif self.num_pixel_value == 4:
                         color_data = (int(self.cluster_centroids[k][0]), int(self.cluster_centroids[k][1]), int(self.cluster_centroids[k][2]), int(self.cluster_centroids[k][3]))
-                    new_data[i] = color_data
+                    new_data[it_point] = color_data
         return new_data
 
 
 if __name__ == '__main__':
     pass
+
