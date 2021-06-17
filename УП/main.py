@@ -17,9 +17,6 @@ def drawingPixels(data, canvas, width, height):
             x2, y2 = (x+1) * 2, (y+1) * 2
             canvas.create_rectangle(x1, y1, x2, y2, fill=color, outline=color)
             
-       
-       
-       
 def main():                
     im = Image.open('6.jpg') 
     # список содержащий значения пикселей    
@@ -28,12 +25,11 @@ def main():
 
     #showImageByPixels(pixels, image_width, image_height)
 
-    cluster = kMeansCluster(pixels, image_width, image_height,50)
-    cluster.startClustering()
-    result = cluster.getResult()
+    cluster = kMeansCluster(pixels, image_width, image_height, 10)
+    result = cluster.startClustering()
     showImageByPixels(result, image_width, image_height)
-
 
                 
 if __name__ == '__main__':
     main()
+
