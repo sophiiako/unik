@@ -73,7 +73,7 @@
             <properties/>
             <border type="none"/>
             <children>
-              <component id="9d1db" class="javax.swing.JTextArea" binding="textLlllllllllllllllllllllllllllllllllllllllllllllllllTextArea" default-binding="true">
+              <component id="9d1db" class="javax.swing.JTextArea" binding="infoTextArea">
                 <constraints/>
                 <properties>
                   <editable value="false"/>
