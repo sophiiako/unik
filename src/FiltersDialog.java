@@ -9,13 +9,34 @@ public class FiltersDialog extends JDialog {
     private JButton ClearButton;
     private JButton okButton;
     private JButton cancelButton;
+    private service serviceUI;
 
-    public FiltersDialog(guif frame) {
+    public FiltersDialog(guif frame, service serviceModule) {
         super(frame, "Filters", true);
+        serviceUI = serviceModule;
         Toolkit toolkit = Toolkit.getDefaultToolkit();
         Dimension dimension = toolkit.getScreenSize();
         setBounds(dimension.width/2 - 250,dimension.height/2 - 150,500,300);
         InitFilterDialog();
+        ActivateButtons();
+    }
+
+    private void ActivateButtons() {
+        cancelButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+            }
+        });
+
+        // place to listen boxes
+
+        okButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                serviceUI.changeFilters();
+            }
+        });
     }
 
     private void InitFilterDialog() {
@@ -23,11 +44,16 @@ public class FiltersDialog extends JDialog {
         mainFiltersPanel.setLayout(new GridBagLayout());
         setContentPane(mainFiltersPanel);
         GridBagConstraints constraints = new GridBagConstraints();
-        mainFiltersPanel.add(new JCheckBox("with documentation"));
-        mainFiltersPanel.add(new JCheckBox("tested"));
+        JCheckBox docBox = new JCheckBox("with documentation");
+        docBox.setSelected(serviceUI.filter.withDocumentation);
+        mainFiltersPanel.add(docBox);
+        JCheckBox testedBox = new JCheckBox("tested");
+        testedBox.setSelected(serviceUI.filter.tested);
+        mainFiltersPanel.add(testedBox);
         JComboBox<String> devices = new JComboBox();
-        devices.addItem("krm");
-        devices.addItem("kam");
+        for (String item : serviceUI.devices.allDevices()) {
+            devices.addItem(item);
+        }
         mainFiltersPanel.add(devices);
 
         JList selectedDevices = new JList();

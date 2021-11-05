@@ -2,8 +2,9 @@ import javax.swing.*;
 import java.util.List;
 
 public class service {
-    private Devices devices;
+    public Devices devices;
     private Info info;
+    public Filter filter;
 
     public service() {
         createAllElements();
@@ -12,6 +13,7 @@ public class service {
     private void createAllElements() {
         devices = new Devices();
         info = new Info();
+        filter = new Filter();
     }
 
     public String addInfoToPanel(String text) {

@@ -27,7 +27,7 @@ public class guif extends JFrame {
         filterButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                FiltersDialog filters = new FiltersDialog(frame);
+                FiltersDialog filters = new FiltersDialog(frame, serviceUI);
                 filters.setVisible(true);
             }
         });
@@ -88,7 +88,7 @@ public class guif extends JFrame {
             settingsMenuItem1.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    DevicesDialog devicesDialog = new DevicesDialog(frame);
+                    DevicesDialog devicesDialog = new DevicesDialog(frame, serviceUI);
                     devicesDialog.setVisible(true);
                 }
             });
