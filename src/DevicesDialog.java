@@ -24,7 +24,7 @@ public class DevicesDialog extends JDialog {
         setBounds(dimension.width / 2 - 250, dimension.height / 2 - 150, 500, 300);
         InitDevicesDialog();
         updatePanel();
-        ActvateButton();
+        ActivateButton();
     }
 
     private void updatePanel() {
@@ -44,7 +44,7 @@ public class DevicesDialog extends JDialog {
 
     }
 
-    private void ActvateButton() {
+    private void ActivateButton() {
         devList.addListSelectionListener(new ListSelectionListener() {
             @Override
             public void valueChanged(ListSelectionEvent e) {

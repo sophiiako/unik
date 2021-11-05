@@ -37,7 +37,7 @@ public class service {
         System.out.println("add firmware");
     }
 
-    public void editFirmwareData() {
+    public void editFirmwareData(String name) {
         System.out.println("edit firmware");
     }
 
@@ -45,7 +45,7 @@ public class service {
         System.out.println("search");
     }
 
-    public void deleteFirmware() {
+    public void deleteFirmware(String name) {
         System.out.println("delete soon");
     }
 

@@ -133,6 +133,30 @@ public class guif extends JFrame {
                     }
                 }
             });
+
+            firmwareList.addListSelectionListener(new ListSelectionListener() {
+                @Override
+                public void valueChanged(ListSelectionEvent e) {
+                    JPopupMenu popup = new JPopupMenu();
+                    JMenuItem del = new JMenuItem("Delete");
+                    JMenuItem edit = new JMenuItem("Edit");
+                    popup.add(del);
+                    popup.add(edit);
+                    del.addActionListener(new ActionListener() {
+                        @Override
+                        public void actionPerformed(ActionEvent e) {
+                            serviceUI.deleteFirmware((String)firmwareList.getSelectedValue());
+                        }
+                    });
+                    edit.addActionListener(new ActionListener() {
+                        @Override
+                        public void actionPerformed(ActionEvent e) {
+                            serviceUI.editFirmwareData((String)firmwareList.getSelectedValue());
+                        }
+                    });
+                    firmwareList.setComponentPopupMenu(popup);
+                }
+            });
         }
 
     public static void main(String[] args) {
