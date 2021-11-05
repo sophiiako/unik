@@ -4,6 +4,8 @@ import javax.swing.event.ListSelectionListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 
 public class DevicesDialog extends JDialog {
@@ -46,13 +48,17 @@ public class DevicesDialog extends JDialog {
         devList.addListSelectionListener(new ListSelectionListener() {
             @Override
             public void valueChanged(ListSelectionEvent e) {
-                if(!e.getValueIsAdjusting()) {
-                    serviceUI.deleteDevice((String)devList.getSelectedValue());
-                    updatePanel();
-                    //System.out.println(firmwareList.getSelectedValue());
-                    //infoTextArea.setText(serviceUI.addInfoToPanel((String)firmwareList.getSelectedValue()));
-
-                }
+                JPopupMenu popup = new JPopupMenu();
+                JMenuItem del = new JMenuItem("Delete");
+                popup.add(del);
+                del.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        serviceUI.deleteDevice((String)devList.getSelectedValue());
+                        updatePanel();
+                    }
+                });
+                devList.setComponentPopupMenu(popup);
             }
         });
 

@@ -61,8 +61,6 @@ public class Devices {
                 for (String item: usingDevices) {
                     writer.write(item);
                     writer.append('\n');
-
-                //writer.flush();
                 }
             }
             catch(IOException ex){
