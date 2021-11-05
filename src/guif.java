@@ -3,10 +3,7 @@ import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.InputEvent;
-import java.awt.event.KeyEvent;
+import java.awt.event.*;
 
 public class guif extends JFrame {
     private static final service serviceUI = new service();
@@ -26,12 +23,22 @@ public class guif extends JFrame {
 
     }
 
-    private void ButtonsActivate(guif frame){
+    private void ButtonsActivate(guif frame) {
         filterButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 FiltersDialog filters = new FiltersDialog(frame);
                 filters.setVisible(true);
+            }
+        });
+
+        sortBox.addItemListener(new ItemListener() {
+            @Override
+            public void itemStateChanged(ItemEvent event) {
+                if (event.getStateChange() == ItemEvent.SELECTED) {
+                    Object item = event.getItem();
+                    serviceUI.sortItems((String)item);
+                }
             }
         });
     }
@@ -86,6 +93,14 @@ public class guif extends JFrame {
                 }
             });
 
+            newMenuItem.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    NewFirmwareDialog firmwareDialog = new NewFirmwareDialog(frame, serviceUI);
+                    firmwareDialog.setVisible(true);
+                }
+            });
+
             editMenu.add(newMenuItem);
             fileMenu.addSeparator();
             fileMenu.add(exitMenuItem);
@@ -113,7 +128,8 @@ public class guif extends JFrame {
                 public void valueChanged(ListSelectionEvent e) {
                     if(!e.getValueIsAdjusting()) {
                         //System.out.println(firmwareList.getSelectedValue());
-                        serviceUI.addInfoToPanel(infoTextArea, (String)firmwareList.getSelectedValue());
+                        infoTextArea.setText(serviceUI.addInfoToPanel((String)firmwareList.getSelectedValue()));
+
                     }
                 }
             });

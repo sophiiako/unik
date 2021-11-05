@@ -3,17 +3,28 @@ import java.util.List;
 
 public class service {
     private Devices devices;
+    private Info info;
 
     public service() {
         createAllElements();
     }
 
-    public void addInfoToPanel(JTextArea area, String text) {
-        area.append(text);
-    }
-
     private void createAllElements() {
         devices = new Devices();
+        info = new Info();
+    }
+
+    public String addInfoToPanel(String text) {
+        return info.changeData(text);
+    }
+
+    public void sortItems(String action) {
+        if (action == "latest first") {
+            System.out.println("sort latest");
+        }
+        else if (action == "earliest first"){
+            System.out.println("sort early");
+        }
     }
 
     public void changeFilters() {

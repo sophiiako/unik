@@ -30,8 +30,8 @@
             </constraints>
             <properties>
               <model>
-                <item value="left"/>
-                <item value="right"/>
+                <item value="latest first"/>
+                <item value="earliest first"/>
               </model>
             </properties>
           </component>
@@ -77,7 +77,7 @@
                 <constraints/>
                 <properties>
                   <editable value="false"/>
-                  <text value="text llllllllllllllllllllllllllllllllllllllllllllllllll"/>
+                  <text value="Info about selected firmware"/>
                 </properties>
               </component>
             </children>
