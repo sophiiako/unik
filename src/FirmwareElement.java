@@ -11,10 +11,10 @@ public class FirmwareElement {
     }
 
     public void goToInitialValues() {
-        name = "unknown";
-        md5 = "unknown";
-        date = "unknown";
-        version = "unknown";
-        platform = "unknown";
+        name = "";
+        md5 = "";
+        date = "";
+        version = "";
+        platform = "";
     }
 }

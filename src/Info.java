@@ -3,7 +3,7 @@ public class Info {
     private String data;
 
     public Info() {
-        data = "Info about selected firmware";
+        data = initialPanel();
     }
 
     public String getInfo() {
@@ -11,7 +11,12 @@ public class Info {
     }
 
     public String changeData(String newData) {
-        data = newData;
+        data = "Info about firmware:\n" + newData;
+        return data;
+    }
+
+    public String initialPanel() {
+        data = "Info about selected firmware";
         return data;
     }
 }

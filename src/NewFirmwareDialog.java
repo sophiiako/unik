@@ -14,9 +14,12 @@ public class NewFirmwareDialog  extends JDialog {
     private JTextField platformField;
     public Service serviceUI;
     public FirmwareElement tempFirmwareElement;
+    private DefaultListModel listModel;
 
-    public NewFirmwareDialog(Gui frame, Service serviceModule) {
+    public NewFirmwareDialog(DefaultListModel Model, Gui frame, Service serviceModule) {
         super(frame, "New firmware", true);
+        getRootPane().setDefaultButton(okButton);
+        listModel = Model;
         tempFirmwareElement = new FirmwareElement();
         serviceUI = serviceModule;
         Toolkit toolkit = Toolkit.getDefaultToolkit();
@@ -70,6 +73,8 @@ public class NewFirmwareDialog  extends JDialog {
             public void actionPerformed(ActionEvent e) {
                 if (createNewFirmwareElement()) {
                     serviceUI.addNewFirmware(tempFirmwareElement);
+                    listModel.addElement(tempFirmwareElement.name);
+                    dispose();
                 }
                 else {
                     JOptionPane.showMessageDialog(new JFrame(), "All fields must be specified!", "Error",

@@ -6,7 +6,7 @@ import java.awt.*;
 import java.awt.event.*;
 
 public class Gui extends JFrame {
-    private static final Service serviceUI = new Service();
+    private DefaultListModel listModel;
     private JPanel mainPanel;
     private JButton filterButton;
     private JList firmwareList;
@@ -15,14 +15,14 @@ public class Gui extends JFrame {
     private JPanel firmwarePanel;
     private JPanel infoPanel;
     private JTextArea infoTextArea;
-    //public FirmwareElement tempFirmwareElement;
+    private Service serviceUI;
 
-    public Gui(String title)  {
+    public Gui(Service serviceModel, String title)  {
         super(title);
-        //Toolkit toolkit = Toolkit.getDefaultToolkit();
-        //Dimension dimension = toolkit.getScreenSize();
-        //setBounds(dimension.width/2 - 400,dimension.height/2 - 250,1800,1500);
-        //tempFirmwareElement = new FirmwareElement();
+        serviceUI = serviceModel;
+        Toolkit toolkit = Toolkit.getDefaultToolkit();
+        Dimension dimension = toolkit.getScreenSize();
+        setBounds(dimension.width/2 - 500,dimension.height/2 - 300,1000,600);
         initUI(this);
         ButtonsActivate(this);
 
@@ -49,6 +49,8 @@ public class Gui extends JFrame {
     }
 
         private void initUI(Gui frame) {
+            listModel = new DefaultListModel();
+            firmwareList.setModel(listModel);
             ImageIcon logo = new ImageIcon("src/logo.png");
             setIconImage(logo.getImage());
             createMenuBar(frame);
@@ -56,7 +58,6 @@ public class Gui extends JFrame {
             setLocationRelativeTo(null);
             setDefaultCloseOperation(EXIT_ON_CLOSE);
             setContentPane(mainPanel);
-            pack();
         }
 
         private void createMenuBar(Gui frame) {
@@ -100,7 +101,7 @@ public class Gui extends JFrame {
             newMenuItem.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    NewFirmwareDialog firmwareDialog = new NewFirmwareDialog(frame, serviceUI);
+                    NewFirmwareDialog firmwareDialog = new NewFirmwareDialog(listModel, frame, serviceUI);
                     firmwareDialog.setVisible(true);
                 }
             });
@@ -117,22 +118,23 @@ public class Gui extends JFrame {
 
             setJMenuBar(menuBar);
         }
+/*
+        private void addToListPanel(FirmwareElement f) {
+            listModel.addElement(f.name);
+
+        }
+
+ */
 
         private void ContentSettings() {
-
-            DefaultListModel listModel = new DefaultListModel();
-            for (int i = 0; i<20; i++){
-                listModel.addElement("item " + Integer.toString(i));
-            }
-
-            firmwareList.setModel(listModel);
 
             firmwareList.addListSelectionListener(new ListSelectionListener() {
                 @Override
                 public void valueChanged(ListSelectionEvent e) {
                     if(!e.getValueIsAdjusting()) {
                         //System.out.println(firmwareList.getSelectedValue());
-                        infoTextArea.setText(serviceUI.addInfoToPanel((String)firmwareList.getSelectedValue()));
+                        String detailedDataAboutFirmware = serviceUI.getInfoToPanel((String)firmwareList.getSelectedValue());
+                        infoTextArea.setText(detailedDataAboutFirmware);
 
                     }
                 }
@@ -149,7 +151,10 @@ public class Gui extends JFrame {
                     del.addActionListener(new ActionListener() {
                         @Override
                         public void actionPerformed(ActionEvent e) {
-                            serviceUI.deleteFirmware((String)firmwareList.getSelectedValue());
+                            String firmwareNameToDelete = (String)firmwareList.getSelectedValue();
+                            serviceUI.deleteFirmware(firmwareNameToDelete);
+                            listModel.removeElement(firmwareNameToDelete);
+                            infoTextArea.setText(serviceUI.flushInfoPanel());
                         }
                     });
                     edit.addActionListener(new ActionListener() {
@@ -163,14 +168,5 @@ public class Gui extends JFrame {
             });
         }
 
-    public static void main(String[] args) {
-        try {
-            UIManager.setLookAndFeel("com.sun.java.swing.plaf.gtk.GTKLookAndFeel");
-        } catch(Exception ignored){}
-        EventQueue.invokeLater(() -> {
 
-            var ex = new Gui("The best application of your life!");
-            ex.setVisible(true);
-        });
-    }
 }

@@ -16,8 +16,10 @@ public class DevicesDialog extends JDialog {
     private JList devList;
     private  Service serviceUI;
 
+
     public DevicesDialog(Gui frame, Service serviceModel) {
         super(frame, "Available platforms", true);
+        getRootPane().setDefaultButton(AddButton);
         serviceUI = serviceModel;
         Toolkit toolkit = Toolkit.getDefaultToolkit();
         Dimension dimension = toolkit.getScreenSize();
@@ -61,6 +63,7 @@ public class DevicesDialog extends JDialog {
                 devList.setComponentPopupMenu(popup);
             }
         });
+
 
         AddButton.addActionListener(new ActionListener() {
             @Override
