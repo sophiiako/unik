@@ -9,10 +9,12 @@ public class FiltersDialog extends JDialog {
     private JButton ClearButton;
     private JButton okButton;
     private JButton cancelButton;
-    private service serviceUI;
+    private Service serviceUI;
+    private Filter tempFilter;
 
-    public FiltersDialog(guif frame, service serviceModule) {
+    public FiltersDialog(Gui frame, Service serviceModule) {
         super(frame, "Filters", true);
+        tempFilter = new Filter();
         serviceUI = serviceModule;
         Toolkit toolkit = Toolkit.getDefaultToolkit();
         Dimension dimension = toolkit.getScreenSize();
@@ -30,11 +32,14 @@ public class FiltersDialog extends JDialog {
         });
 
         // place to listen boxes
+        //tempFilter.doc = ..
+
+
 
         okButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                serviceUI.changeFilters();
+                serviceUI.changeFilters(tempFilter);
             }
         });
     }

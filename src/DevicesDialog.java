@@ -14,10 +14,10 @@ public class DevicesDialog extends JDialog {
     private JTextField devField;
     private JButton AddButton;
     private JList devList;
-    private  service serviceUI;
+    private  Service serviceUI;
 
-    public DevicesDialog(guif frame, service serviceModel) {
-        super(frame, "Available devices", true);
+    public DevicesDialog(Gui frame, Service serviceModel) {
+        super(frame, "Available platforms", true);
         serviceUI = serviceModel;
         Toolkit toolkit = Toolkit.getDefaultToolkit();
         Dimension dimension = toolkit.getScreenSize();
