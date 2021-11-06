@@ -1,4 +1,5 @@
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -6,9 +7,25 @@ import java.awt.event.ActionListener;
 
 public class FiltersDialog extends JDialog {
     private JPanel mainFiltersPanel;
-    private JButton ClearButton;
     private JButton okButton;
     private JButton cancelButton;
+    private JCheckBox rollingCheckBox;
+    private JCheckBox anotherBranchesCheckBox;
+    private JCheckBox masterCheckBox;
+    private JCheckBox withDocumentationCheckBox;
+    private JCheckBox useAllPlatformsCheckBox;
+    private JComboBox platformsBox;
+    private JButton addButton;
+    private JPanel platformsPanel;
+    private JPanel docPanel;
+    private JPanel versionPanel;
+    private JPanel testPanel;
+    private JList selectedDevicesList;
+    private JPanel datePanel;
+    private JRadioButton useAllDateRadioButton;
+    private JRadioButton defineDateIntervalRadioButton;
+    private JCheckBox testedCheckBox;
+    private JCheckBox notTestedCheckBox;
     private Service serviceUI;
     private Filter tempFilter;
 
@@ -18,7 +35,7 @@ public class FiltersDialog extends JDialog {
         serviceUI = serviceModule;
         Toolkit toolkit = Toolkit.getDefaultToolkit();
         Dimension dimension = toolkit.getScreenSize();
-        setBounds(dimension.width/2 - 250,dimension.height/2 - 150,500,300);
+        setBounds(dimension.width/2 - 400,dimension.height/2 - 250,800,500);
         InitFilterDialog();
         ActivateButtons();
     }
@@ -45,51 +62,38 @@ public class FiltersDialog extends JDialog {
     }
 
     private void InitFilterDialog() {
-        //JPanel mainFiltersPanel = new JPanel();
-        mainFiltersPanel.setLayout(new GridBagLayout());
-        setContentPane(mainFiltersPanel);
-        GridBagConstraints constraints = new GridBagConstraints();
-        JCheckBox docBox = new JCheckBox("with documentation");
-        docBox.setSelected(serviceUI.filter.withDocumentation);
-        mainFiltersPanel.add(docBox);
-        JCheckBox testedBox = new JCheckBox("tested");
-        testedBox.setSelected(serviceUI.filter.tested);
-        mainFiltersPanel.add(testedBox);
-        JComboBox<String> devices = new JComboBox();
-        for (String item : serviceUI.devices.allDevices()) {
-            devices.addItem(item);
-        }
-        mainFiltersPanel.add(devices);
 
-        JList selectedDevices = new JList();
+
+        Border versionBorder = BorderFactory.createTitledBorder("version");
+        versionPanel.setBorder(versionBorder);
+        Border documentationBorder = BorderFactory.createTitledBorder("documentation");
+        docPanel.setBorder(documentationBorder);
+        Border testBorder = BorderFactory.createTitledBorder("test");
+        testPanel.setBorder(testBorder);
+        Border dateBorder = BorderFactory.createTitledBorder("date");
+        datePanel.setBorder(dateBorder);
+        Border platformBorder = BorderFactory.createTitledBorder("platform");
+        platformsPanel.setBorder(platformBorder);
 
         DefaultListModel selectedDevicesModel = new DefaultListModel();
 
-        devices.addActionListener(new ActionListener() {
+        for (String item : serviceUI.devices.allDevices()) {
+            platformsBox.addItem(item);
+        }
+        //mainFiltersPanel.add(devices);
+        addButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                var selectedDevice = devices.getSelectedItem();
-                if (!hasElement(selectedDevice, selectedDevices)) {
-                    selectedDevicesModel.addElement(devices.getSelectedItem());
-                    System.out.println(devices.getSelectedItem());
+                var selectedDevice = platformsBox.getSelectedItem();
+                if (!hasElement(selectedDevice, selectedDevicesList)) {
+                    selectedDevicesModel.addElement(platformsBox.getSelectedItem());
                 }
             }
         });
 
-        selectedDevices.setModel(selectedDevicesModel);
-        mainFiltersPanel.add(selectedDevices);
-        /*
-        JButton filtersClear = new JButton("Clear");
-        JButton filtersCancel = new JButton("Cancel");
-        JButton filtersOk = new JButton("Ok");
+        selectedDevicesList.setModel(selectedDevicesModel);
 
-
-
-        mainFiltersPanel.add(filtersCancel);
-        mainFiltersPanel.add(filtersClear);
-        mainFiltersPanel.add(filtersOk);
-
-         */
+        setContentPane(mainFiltersPanel);
 
     }
 
