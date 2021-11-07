@@ -8,23 +8,63 @@ import java.awt.event.*;
 public class Gui extends JFrame {
     private DefaultListModel listModel;
     private JPanel mainPanel;
+    private JPanel infoPanel;
     private JButton filterButton;
     private JList firmwareList;
     private JComboBox sortBox;
     private JLabel sortedLabel;
     private JPanel firmwarePanel;
-    private JPanel infoPanel;
-    private JTextArea infoTextArea;
+    private JPanel toolPanel;
+    private JButton addFirmwareButton;
+    private JButton addPlatformsButton;
+    private JButton updateButton;
+    private JPanel firmwareInfoPanel;
+    private JTextPane infoTextPane;
+    private JLabel firmwareInfoLabel;
+    //private JTextArea infoTextArea;
     private Service serviceUI;
 
     public Gui(Service serviceModel, String title)  {
         super(title);
         serviceUI = serviceModel;
         Toolkit toolkit = Toolkit.getDefaultToolkit();
+
         Dimension dimension = toolkit.getScreenSize();
         setBounds(dimension.width/2 - 500,dimension.height/2 - 300,1000,600);
         initUI(this);
         ButtonsActivate(this);
+        activateLayout();
+        //pack();
+
+    }
+
+    private void activateLayout() {
+        mainPanel.setLayout(new GridBagLayout());
+        GridBagConstraints c = new GridBagConstraints();
+        c.anchor = GridBagConstraints.FIRST_LINE_START;
+        c.fill = GridBagConstraints.BOTH;
+        c.weightx = 0.07;
+        c.weighty = 0.5;
+        //c.gridx = 1;
+        c.gridy = 0;
+        mainPanel.add(toolPanel, c);
+
+        c.anchor = GridBagConstraints.FIRST_LINE_START;
+        c.fill = GridBagConstraints.BOTH;
+        c.weightx = 0.2;
+        c.weighty = 0.5;
+        //c.gridx = 2;
+        c.gridy = 0;
+        mainPanel.add(firmwarePanel, c);
+
+        c.anchor = GridBagConstraints.FIRST_LINE_START;
+        c.fill = GridBagConstraints.BOTH;
+        c.weightx = 0.4;
+        c.weighty = 0.5;
+        //c.gridx = 3;
+        c.gridy = 0;
+        mainPanel.add(infoPanel, c);
+
 
     }
 
@@ -49,48 +89,26 @@ public class Gui extends JFrame {
     }
 
         private void initUI(Gui frame) {
+        //toolPanel.setAlignmentX(10);
             listModel = new DefaultListModel();
             firmwareList.setModel(listModel);
             ImageIcon logo = new ImageIcon("src/logo.png");
             setIconImage(logo.getImage());
-            createMenuBar(frame);
+            createToolBar(frame);
             ContentSettings();
             setLocationRelativeTo(null);
             setDefaultCloseOperation(EXIT_ON_CLOSE);
             setContentPane(mainPanel);
         }
 
-        private void createMenuBar(Gui frame) {
+        private void createToolBar(Gui frame) {
+            updateButton.setToolTipText("Update firmware list");
+            addFirmwareButton.setToolTipText("Add new firmware");
+            addPlatformsButton.setToolTipText("Add new available platform");
 
-            JMenuBar menuBar = new JMenuBar();
+            //exitMenuItem.addActionListener((event) -> System.exit(0));
 
-            JMenu fileMenu = new JMenu("File");
-            JMenu editMenu = new JMenu("Edit");
-            JMenu settingsMenu = new JMenu("Settings");
-
-            JMenuItem newMenuItem = new JMenuItem("New firmware");
-            newMenuItem.setToolTipText("Add new firmware");
-            newMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_A,
-                    InputEvent.CTRL_DOWN_MASK));
-
-            JMenuItem exitMenuItem = new JMenuItem("Exit");
-            exitMenuItem.setToolTipText("Exit application");
-            exitMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_W,
-                    InputEvent.CTRL_DOWN_MASK));
-
-            JMenuItem settingsMenuItem1 = new JMenuItem("Add platforms");
-            settingsMenuItem1.setToolTipText("Add available platforms");
-            settingsMenuItem1.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_E,
-                    InputEvent.CTRL_DOWN_MASK));
-
-            JMenuItem settingsMenuItem2 = new JMenuItem("Add functionalities");
-            settingsMenuItem2.setToolTipText("Add available functionalities");
-            settingsMenuItem2.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_D,
-                    InputEvent.CTRL_DOWN_MASK));
-
-            exitMenuItem.addActionListener((event) -> System.exit(0));
-
-            settingsMenuItem1.addActionListener(new ActionListener() {
+            addPlatformsButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     DevicesDialog devicesDialog = new DevicesDialog(frame, serviceUI);
@@ -98,7 +116,7 @@ public class Gui extends JFrame {
                 }
             });
 
-            newMenuItem.addActionListener(new ActionListener() {
+            addFirmwareButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     NewFirmwareDialog firmwareDialog = new NewFirmwareDialog(listModel, frame, serviceUI);
@@ -106,17 +124,6 @@ public class Gui extends JFrame {
                 }
             });
 
-            editMenu.add(newMenuItem);
-            fileMenu.addSeparator();
-            fileMenu.add(exitMenuItem);
-            settingsMenu.add(settingsMenuItem1);
-            settingsMenu.add(settingsMenuItem2);
-
-            menuBar.add(fileMenu);
-            menuBar.add(editMenu);
-            menuBar.add(settingsMenu);
-
-            setJMenuBar(menuBar);
         }
 /*
         private void addToListPanel(FirmwareElement f) {
@@ -134,7 +141,7 @@ public class Gui extends JFrame {
                     if(!e.getValueIsAdjusting()) {
                         //System.out.println(firmwareList.getSelectedValue());
                         String detailedDataAboutFirmware = serviceUI.getInfoToPanel((String)firmwareList.getSelectedValue());
-                        infoTextArea.setText(detailedDataAboutFirmware);
+                        infoTextPane.setText(detailedDataAboutFirmware);
 
                     }
                 }
@@ -154,7 +161,7 @@ public class Gui extends JFrame {
                             String firmwareNameToDelete = (String)firmwareList.getSelectedValue();
                             serviceUI.deleteFirmware(firmwareNameToDelete);
                             listModel.removeElement(firmwareNameToDelete);
-                            infoTextArea.setText(serviceUI.flushInfoPanel());
+                            infoTextPane.setText(serviceUI.flushInfoPanel());
                         }
                     });
                     edit.addActionListener(new ActionListener() {
@@ -167,6 +174,7 @@ public class Gui extends JFrame {
                 }
             });
         }
+
 
 
 }
