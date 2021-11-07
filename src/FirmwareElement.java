@@ -2,7 +2,7 @@
 public class FirmwareElement {
     public String name;
     public String md5;
-    public String date;
+    public Date date;
     public String version;
     public String platform;
 
@@ -13,7 +13,7 @@ public class FirmwareElement {
     public void goToInitialValues() {
         name = "";
         md5 = "";
-        date = "";
+        date = new Date("");
         version = "";
         platform = "";
     }

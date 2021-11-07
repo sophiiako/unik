@@ -33,7 +33,7 @@ public class Request {
     }
     public String createSearchRequestByName(String name) {
         FirmwareElement element = db.getByName(name);
-        return "date:\n" + element.date + "\nmd5:\n" + element.md5 + "\nplatform:\n"
+        return "date:\n" + element.date.resultDate + "\nmd5:\n" + element.md5 + "\nplatform:\n"
                                                      + element.platform + "\nversion:\n" + element.version + "\n";
     }
 }

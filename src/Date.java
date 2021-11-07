@@ -6,9 +6,10 @@ import java.util.regex.Pattern;
 public class Date {
     private static final Integer[] daysInMonth = {31, 0, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
     private static String datePattern = "(\\d+)\\.(\\d+)\\.(\\d+)";
-    public int Day;
-    public int Month;
-    public int Year;
+    private int Day;
+    private int Month;
+    private int Year;
+    public String resultDate;
     private boolean validity;
 
     public Date(int day, int month, int year) {
@@ -17,6 +18,7 @@ public class Date {
         } else {
             validity = false;
         }
+        resultDate = dateToString();
     }
 
     public Date(String date) {
@@ -26,6 +28,7 @@ public class Date {
             validity = false;
         }
         System.out.println(Day);
+        resultDate = dateToString();
     }
 
     public boolean parseString(String date) {
@@ -47,8 +50,23 @@ public class Date {
         }
     }
 
-    public String dateToString() {
-        return "";
+    private String dateToString() {
+        if (!validity) {return "";}
+        String result = "";
+        if (Day > 9) {
+            result += Integer.toString(Day) + ".";
+        }
+        else {
+            result +=  "0" + Integer.toString(Day) + ".";
+        }
+        if (Month > 9) {
+            result += Integer.toString(Month) + ".";
+        }
+        else {
+            result +=  "0" + Integer.toString(Month) + ".";
+        }
+        result += Integer.toString(Year);
+        return result;
     }
 
     private boolean check() {

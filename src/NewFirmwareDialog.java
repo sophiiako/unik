@@ -38,46 +38,50 @@ public class NewFirmwareDialog  extends JDialog {
 
     }
 
-    private boolean checkTextFieldsData(FirmwareElement temp) {
-        if (temp.version.equals("") || temp.date.equals("") || temp.platform.equals("") ||
+    private String checkTextFieldsData(FirmwareElement temp) {
+        // returns error msg
+        if (temp.version.equals("") ||  temp.platform.equals("") ||
                                                                    temp.md5.equals("") || temp.name.equals("")) {
-            return false;
+            return "Error. Not enough arguments. Specify all fields!";
         }
-        return true;
+        if (temp.date.resultDate.equals("")) {
+            return "Date format is wrong. Format must be [day.month.year]. Check it.";
+        }
+        return "";
     }
 
-    private boolean createNewFirmwareElement() {
+    private String createNewFirmwareElement() {
+        // returns error msg
         tempFirmwareElement.name = nameField.getText();
         nameField.setText("");
         tempFirmwareElement.md5 = md5Field.getText();
         md5Field.setText("");
-        tempFirmwareElement.date = dateField.getText();
+        tempFirmwareElement.date = new Date(dateField.getText());
         dateField.setText("");
         tempFirmwareElement.version = versionField.getText();
         versionField.setText("");
         tempFirmwareElement.platform = platformField.getText();
         platformField.setText("");
+        String errorMsg = checkTextFieldsData(tempFirmwareElement);
 
-        if (checkTextFieldsData(tempFirmwareElement)) {
-            return true;
-        }
-        else {
+        if (!errorMsg.equals("")) {
             tempFirmwareElement.goToInitialValues();
-            return false;
         }
+        return errorMsg;
     }
 
     private void activateButtons() {
         okButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (createNewFirmwareElement()) {
+                String errMsg = createNewFirmwareElement();
+                if (errMsg.equals("")) {
                     serviceUI.addNewFirmware(tempFirmwareElement);
                     listModel.addElement(tempFirmwareElement.name);
                     dispose();
                 }
                 else {
-                    JOptionPane.showMessageDialog(new JFrame(), "All fields must be specified!", "Error",
+                    JOptionPane.showMessageDialog(new JFrame(), errMsg, "Error",
                             JOptionPane.ERROR_MESSAGE);
                 }
             }
