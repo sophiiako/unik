@@ -96,7 +96,7 @@
               </grid>
             </constraints>
             <properties>
-              <background color="-9197353"/>
+              <background color="-5717539"/>
               <borderPainted value="true"/>
               <foreground color="-16724737"/>
               <orientation value="1"/>
@@ -166,6 +166,7 @@
         <properties>
           <background color="-263173"/>
           <enabled value="true"/>
+          <foreground color="-5717539"/>
         </properties>
         <border type="bevel-raised"/>
         <children>
@@ -182,7 +183,8 @@
                 <margin top="0" left="0" bottom="0" right="0"/>
                 <constraints/>
                 <properties>
-                  <background color="-2631721"/>
+                  <background color="-5717539"/>
+                  <foreground color="-5717539"/>
                 </properties>
                 <border type="none"/>
                 <children>
@@ -228,7 +230,8 @@
                 <margin top="0" left="0" bottom="0" right="0"/>
                 <constraints/>
                 <properties>
-                  <background color="-1447447"/>
+                  <background color="-5717539"/>
+                  <foreground color="-5717539"/>
                 </properties>
                 <border type="none"/>
                 <children>
@@ -250,7 +253,7 @@
                       </grid>
                     </constraints>
                     <properties>
-                      <background color="-2631721"/>
+                      <background color="-5717539"/>
                       <editable value="false"/>
                       <foreground color="-14276009"/>
                       <text value="the field for another info: doc, tests and etc"/>

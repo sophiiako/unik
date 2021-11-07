@@ -84,7 +84,15 @@ public class Gui extends JFrame {
             public void itemStateChanged(ItemEvent event) {
                 if (event.getStateChange() == ItemEvent.SELECTED) {
                     Object item = event.getItem();
-                    serviceUI.sortItems((String)item);
+                    listModel.clear();;
+                    //for(String n : )
+                    java.util.List<String> newModel = serviceUI.sortItems((String)item);
+                    listModel.clear();
+                    for (String n : newModel) {
+
+                        listModel.addElement(n);
+                    }
+
                 }
             }
         });
@@ -148,7 +156,6 @@ public class Gui extends JFrame {
                     }
                 }
             });
-
             firmwareList.addListSelectionListener(new ListSelectionListener() {
                 @Override
                 public void valueChanged(ListSelectionEvent e) {

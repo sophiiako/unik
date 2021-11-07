@@ -1,5 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Service {
@@ -20,6 +21,7 @@ public class Service {
         filter = new Filter();
     }
 
+
     public String getInfoToPanel(String name) {
         return info.changeData(getAllFirmwareData(name));
     }
@@ -28,13 +30,32 @@ public class Service {
         return info.initialPanel();
     }
 
-    public void sortItems(String action) {
+    public List<String> sortItems(String action) {
+        List<FirmwareElement> result = request.tempRequestToGetAllDates();
+
+        List<FirmwareElement> sortedResult = (new Sort()).sortElements(result);
+
+        List<String> newModel = new ArrayList<String>();
         if (action == "latest first") {
+
+            //преобразовать список наоборот
             System.out.println("sort latest");
+
+            for (int i = sortedResult.size() - 1; i > -1; i--){
+                newModel.add(sortedResult.get(i).name);
+                System.out.println("llll");
+                System.out.println(sortedResult.get(i).name);
+            }
+
         }
         else if (action == "earliest first"){
             System.out.println("sort early");
+            for(FirmwareElement n: sortedResult) {
+                newModel.add(n.name);
+            }
         }
+
+        return newModel;
     }
 
     public void changeFilters(Filter newFilter) {

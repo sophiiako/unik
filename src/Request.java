@@ -24,6 +24,7 @@ public class Request {
     }
 
     public List<String> createSearchRequest() {
+        // получаем только имена всех прошивок
         List<FirmwareElement> f = db.getAll();
         List<String> data = new ArrayList<String>();
         for (FirmwareElement e : f) {
@@ -31,7 +32,13 @@ public class Request {
         }
         return data;
     }
+
+    public List<FirmwareElement> tempRequestToGetAllDates() {
+        return db.getAll();
+    }
+
     public String createSearchRequestByName(String name) {
+        // получаем всю инфу о конкретной прошивке
         FirmwareElement element = db.getByName(name);
         return "date:\n" + element.date.resultDate + "\nmd5:\n" + element.md5 + "\nplatform:\n"
                                                      + element.platform + "\nversion:\n" + element.version + "\n";

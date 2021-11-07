@@ -31,6 +31,31 @@ public class Date {
         resultDate = dateToString();
     }
 
+    public int compareTo(Date d) {
+        // like string
+        // like >
+        // if == returns 0
+        // if > , returns 1
+        // if < returns -1
+
+        if (Month == d.Month && Day == d.Day && Year == d.Year) {return 0;}
+
+        if (Year > d.Year) {return 1;}
+
+        if (Year < d.Year) {return -1;}
+
+        if (Month > d.Month) {return 1;}
+
+        if (Month < d.Month) {return  -1;}
+
+        if (Day > d.Day) {return 1;}
+
+        if (Day < d.Day) {return  -1;}
+
+        return 0;
+
+    }
+
     public boolean parseString(String date) {
         Pattern r = Pattern.compile(datePattern);
         Matcher m = r.matcher(date);
