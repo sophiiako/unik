@@ -18,9 +18,11 @@ public class Gui extends JFrame {
     private JButton addFirmwareButton;
     private JButton addPlatformsButton;
     private JButton updateButton;
-    private JPanel firmwareInfoPanel;
+    private JPanel firmInfoPanel;
     private JTextPane infoTextPane;
     private JLabel firmwareInfoLabel;
+    private JTextPane theFieldForAnotherTextPane;
+    private JPanel anotherInfoPanel;
     //private JTextArea infoTextArea;
     private Service serviceUI;
 
