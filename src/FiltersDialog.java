@@ -28,8 +28,8 @@ public class FiltersDialog extends JDialog {
     private JRadioButton defineDateIntervalRadioButton;
     private JCheckBox testedCheckBox;
     private JCheckBox notTestedCheckBox;
-    private JTextField textField1;
-    private JTextField textField2;
+    private JTextField fromField;
+    private JTextField toField;
     private Service serviceUI;
     private Filter tempFilter;
 
@@ -41,7 +41,26 @@ public class FiltersDialog extends JDialog {
         Dimension dimension = toolkit.getScreenSize();
         setBounds(dimension.width/2 - 350,dimension.height/2 - 300,700,600);
         InitFilterDialog();
+
+        ButtonsToInitialState();
         ActivateButtons();
+    }
+
+    private void ButtonsToInitialState() {
+        masterCheckBox.setSelected(true);
+        rollingCheckBox.setSelected(true);
+        anotherBranchesCheckBox.setSelected(true);
+
+        testedCheckBox.setSelected(true);
+        notTestedCheckBox.setSelected(true);
+
+        useAllDateRadioButton.setSelected(true);
+
+        useAllPlatformsCheckBox.setSelected(true);
+
+        fromField.setEnabled(false);
+        toField.setEnabled(false);
+        addButton.setEnabled(false);
     }
 
     private void ActivateButtons() {
@@ -54,6 +73,46 @@ public class FiltersDialog extends JDialog {
 
         // place to listen boxes
         //tempFilter.doc = ..
+
+        useAllDateRadioButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (useAllDateRadioButton.isSelected()) {
+                    //fromField.setEditable(false);
+                    //toField.setEditable(false);
+                    fromField.setEnabled(false);
+                    toField.setEnabled(false);
+                    // add logic
+                }
+            }
+        });
+
+        defineDateIntervalRadioButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (defineDateIntervalRadioButton.isSelected()) {
+                    fromField.setEnabled(true);
+                    toField.setEnabled(true);
+                }
+            }
+        });
+
+        useAllPlatformsCheckBox.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (useAllPlatformsCheckBox.isSelected()) {
+                    addButton.setEnabled(false);
+                    // add logic
+                }
+                else {
+                    addButton.setEnabled(true);
+
+                    // logic
+                }
+            }
+        });
+
+
 
 
 
