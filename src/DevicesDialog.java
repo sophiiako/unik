@@ -21,12 +21,7 @@ public class DevicesDialog extends JDialog {
         super(frame, "Available platforms", true);
         getRootPane().setDefaultButton(AddButton);
         serviceUI = serviceModel;
-        Toolkit toolkit = Toolkit.getDefaultToolkit();
-        Dimension dimension = toolkit.getScreenSize();
-        setBounds(dimension.width / 2 - 250, dimension.height / 2 - 150, 500, 300);
         InitDevicesDialog();
-        updatePanel();
-        ActivateButton();
     }
 
     private void updatePanel() {
@@ -39,11 +34,12 @@ public class DevicesDialog extends JDialog {
     }
 
     private void InitDevicesDialog() {
-        //JPanel mainDevicesPanel = new JPanel();
-        //mainDevicesPanel.setLayout(new GridBagLayout());
+        Toolkit toolkit = Toolkit.getDefaultToolkit();
+        Dimension dimension = toolkit.getScreenSize();
+        setBounds(dimension.width / 2 - 250, dimension.height / 2 - 150, 500, 300);
+        updatePanel();
+        ActivateButton();
         setContentPane(mainDevicesPanel);
-        //GridBagConstraints constraints = new GridBagConstraints();
-
     }
 
     private void ActivateButton() {
@@ -73,7 +69,6 @@ public class DevicesDialog extends JDialog {
                 if (device != "") {
                     serviceUI.devices.addNewDevice(device);
                     updatePanel();
-                    //update list
 
                 }
             }

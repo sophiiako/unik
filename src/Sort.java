@@ -5,13 +5,7 @@ public  class Sort {
 
 
     public List<FirmwareElement> sortElements(List<FirmwareElement> arr) {
-        //List<String> result = new ArrayList<String>(); // think
         quickSort(arr, 0, arr.size() - 1);
-        System.out.println("-----");
-        for (FirmwareElement i : arr) {
-            System.out.println(i.date.resultDate);
-        }
-
         return arr;
     }
 
@@ -56,19 +50,4 @@ public  class Sort {
     }
 
 
-    public static void main(String[] args) {
-        List<FirmwareElement> arr = new ArrayList<FirmwareElement>();
-        FirmwareElement a1 = new FirmwareElement();
-        a1.date = new Date("01.01.2018");
-        arr.add(a1);
-        FirmwareElement a2 = new FirmwareElement();
-        a2.date = new Date("03.06.2021");
-        arr.add(a2);
-        arr.add(a2);
-        FirmwareElement a3 = new FirmwareElement();
-        a3.date = new Date("05.05.2020");
-        arr.add(a3);
-
-       new Sort().sortElements(arr);
-    }
 }

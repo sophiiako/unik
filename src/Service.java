@@ -43,8 +43,6 @@ public class Service {
 
             for (int i = sortedResult.size() - 1; i > -1; i--){
                 newModel.add(sortedResult.get(i).name);
-                System.out.println("llll");
-                System.out.println(sortedResult.get(i).name);
             }
 
         }

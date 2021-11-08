@@ -103,7 +103,6 @@ public class Gui extends JFrame {
             public void itemStateChanged(ItemEvent event) {
                 if (event.getStateChange() == ItemEvent.SELECTED) {
                     Object item = event.getItem();
-                    //for(String n : )
                     java.util.List<String> newModel = serviceUI.sortItems((String)item);
                     changeListView(newModel);
                     infoTextPane.setText(serviceUI.resetInfoPanel());
@@ -162,13 +161,6 @@ public class Gui extends JFrame {
             });
 
         }
-/*
-        private void addToListPanel(FirmwareElement f) {
-            listModel.addElement(f.name);
-
-        }
-
- */
 
         private void ContentSettings() {
 
@@ -176,7 +168,6 @@ public class Gui extends JFrame {
                 @Override
                 public void valueChanged(ListSelectionEvent e) {
                     if(!e.getValueIsAdjusting()) {
-                        //System.out.println(firmwareList.getSelectedValue());
                         String detailedDataAboutFirmware = serviceUI.getInfoToPanel((String)firmwareList.getSelectedValue());
                         infoTextPane.setText(detailedDataAboutFirmware);
 

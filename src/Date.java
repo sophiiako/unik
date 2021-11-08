@@ -27,7 +27,6 @@ public class Date {
         } else {
             validity = false;
         }
-        System.out.println(Day);
         resultDate = dateToString();
     }
 
