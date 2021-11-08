@@ -32,7 +32,7 @@ public class Devices {
         return usingDevices;
     }
 
-    private boolean isExist(String element) {
+    public boolean isExist(String element) {
         for (String item : usingDevices) {
             if (element.equals(item)) {
                 return true;

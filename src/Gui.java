@@ -106,13 +106,14 @@ public class Gui extends JFrame {
                     //for(String n : )
                     java.util.List<String> newModel = serviceUI.sortItems((String)item);
                     changeListView(newModel);
+                    infoTextPane.setText(serviceUI.resetInfoPanel());
 
                 }
             }
         });
     }
 
-        private void loadFirmwareList() {
+        public void loadFirmwareList() {
             listModel = new DefaultListModel();
             firmwareList.setModel(listModel);
 

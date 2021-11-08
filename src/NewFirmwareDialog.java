@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class NewFirmwareDialog  extends JDialog {
+    private Gui gui;
     private JTextField nameField;
     private JTextField md5Field;
     private JTextField dateField;
@@ -18,6 +19,7 @@ public class NewFirmwareDialog  extends JDialog {
 
     public NewFirmwareDialog(DefaultListModel Model, Gui frame, Service serviceModule) {
         super(frame, "New firmware", true);
+        gui = frame;
         getRootPane().setDefaultButton(okButton);
         listModel = Model;
         tempFirmwareElement = new FirmwareElement();
@@ -45,7 +47,11 @@ public class NewFirmwareDialog  extends JDialog {
             return "Error. Not enough arguments. Specify all fields!";
         }
         if (temp.date.resultDate.equals("")) {
-            return "Date format is wrong. Format must be [day.month.year]. Check it.";
+            return "Date format is wrong. Format must be [day.month.year]. Also year can be only 2017-2021. Check it.";
+        }
+
+        if (!(new Devices()).isExist(temp.platform)) {
+            return "This platform doesn\'t exist in available devices. If this platform is really exist, Add it.";
         }
         return "";
     }
@@ -78,6 +84,10 @@ public class NewFirmwareDialog  extends JDialog {
                 if (errMsg.equals("")) {
                     serviceUI.addNewFirmware(tempFirmwareElement);
                     listModel.addElement(tempFirmwareElement.name);
+
+                    // sort list panel
+                    gui.loadFirmwareList();
+
                     dispose();
                 }
                 else {
