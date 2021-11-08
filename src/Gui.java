@@ -2,6 +2,7 @@
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import javax.swing.text.html.ListView;
 import java.awt.*;
 import java.awt.event.*;
 
@@ -29,15 +30,25 @@ public class Gui extends JFrame {
     public Gui(Service serviceModel, String title)  {
         super(title);
         serviceUI = serviceModel;
-        Toolkit toolkit = Toolkit.getDefaultToolkit();
 
+        Toolkit toolkit = Toolkit.getDefaultToolkit();
         Dimension dimension = toolkit.getScreenSize();
         setBounds(dimension.width/2 - 500,dimension.height/2 - 300,1000,600);
+
         initUI(this);
+    }
+
+    private void initUI(Gui frame) {
+        ImageIcon logo = new ImageIcon("src/logo.png");
+        setIconImage(logo.getImage());
+        createToolBar(frame);
+        loadFirmwareList();
         ButtonsActivate(this);
         activateLayout();
-        //pack();
-
+        ContentSettings();
+        setLocationRelativeTo(null);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setContentPane(mainPanel);
     }
 
     private void activateLayout() {
@@ -70,6 +81,14 @@ public class Gui extends JFrame {
 
     }
 
+    private void changeListView(java.util.List<String> newModel) {
+        listModel.clear();
+        for (String n : newModel) {
+
+            listModel.addElement(n);
+        }
+    }
+
     private void ButtonsActivate(Gui frame) {
         filterButton.addActionListener(new ActionListener() {
             @Override
@@ -84,31 +103,32 @@ public class Gui extends JFrame {
             public void itemStateChanged(ItemEvent event) {
                 if (event.getStateChange() == ItemEvent.SELECTED) {
                     Object item = event.getItem();
-                    listModel.clear();;
                     //for(String n : )
                     java.util.List<String> newModel = serviceUI.sortItems((String)item);
-                    listModel.clear();
-                    for (String n : newModel) {
-
-                        listModel.addElement(n);
-                    }
+                    changeListView(newModel);
 
                 }
             }
         });
     }
 
-        private void initUI(Gui frame) {
-        //toolPanel.setAlignmentX(10);
+        private void loadFirmwareList() {
             listModel = new DefaultListModel();
             firmwareList.setModel(listModel);
-            ImageIcon logo = new ImageIcon("src/logo.png");
-            setIconImage(logo.getImage());
-            createToolBar(frame);
-            ContentSettings();
-            setLocationRelativeTo(null);
-            setDefaultCloseOperation(EXIT_ON_CLOSE);
-            setContentPane(mainPanel);
+
+            //load all firmwares and sort by sortbox now
+            Object item = sortBox.getSelectedItem();
+            java.util.List<String> newModel = serviceUI.sortItems((String)item);
+            changeListView(newModel);
+
+            // reset info panel because no selected elements after
+
+            infoTextPane.setText(serviceUI.resetInfoPanel());
+
+        }
+
+        private void updateFirmwareList() {
+            loadFirmwareList();
         }
 
         private void createToolBar(Gui frame) {
@@ -117,6 +137,12 @@ public class Gui extends JFrame {
             addPlatformsButton.setToolTipText("Add new available platform");
 
             //exitMenuItem.addActionListener((event) -> System.exit(0));
+            updateButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    updateFirmwareList();
+                }
+            });
 
             addPlatformsButton.addActionListener(new ActionListener() {
                 @Override
@@ -170,7 +196,7 @@ public class Gui extends JFrame {
                             String firmwareNameToDelete = (String)firmwareList.getSelectedValue();
                             serviceUI.deleteFirmware(firmwareNameToDelete);
                             listModel.removeElement(firmwareNameToDelete);
-                            infoTextPane.setText(serviceUI.flushInfoPanel());
+                            infoTextPane.setText(serviceUI.resetInfoPanel());
                         }
                     });
                     edit.addActionListener(new ActionListener() {

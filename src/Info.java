@@ -11,7 +11,7 @@ public class Info {
     }
 
     public String changeData(String newData) {
-        data = "Info about firmware:\n" + newData;
+        data = "\n" + newData;
         return data;
     }
 

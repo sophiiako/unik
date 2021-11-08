@@ -26,7 +26,7 @@ public class Service {
         return info.changeData(getAllFirmwareData(name));
     }
 
-    public String flushInfoPanel(){
+    public String resetInfoPanel(){
         return info.initialPanel();
     }
 
