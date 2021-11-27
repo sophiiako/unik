@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2021-11-21T18:16:17.622Z" agent="5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.114 Safari/537.36" etag="ldhJFHSVm6aO7CyxwxdO" version="15.8.3" type="github">
+<mxfile host="app.diagrams.net" modified="2021-11-27T19:32:37.451Z" agent="5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.114 Safari/537.36" etag="JYST62RlM0fQ8cu99iHO" version="15.8.3" type="github">
   <diagram id="C5RBs43oDa-KdzZeNtuy" name="Page-1">
     <mxGraphModel dx="1896" dy="969" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -69,6 +69,9 @@
         <mxCell id="vWnuXFx7iVDM5a5PLiHu-21" value="Добавление устройства в сеть" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
           <mxGeometry x="470" y="880" width="150" height="60" as="geometry" />
         </mxCell>
+        <mxCell id="vWnuXFx7iVDM5a5PLiHu-39" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="vWnuXFx7iVDM5a5PLiHu-22" target="vWnuXFx7iVDM5a5PLiHu-38">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
         <mxCell id="vWnuXFx7iVDM5a5PLiHu-22" value="Конфигурация устройства" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
           <mxGeometry x="190" y="960" width="120" height="80" as="geometry" />
         </mxCell>
@@ -131,6 +134,15 @@
             <mxPoint x="390" y="410" as="sourcePoint" />
             <mxPoint x="440" y="360" as="targetPoint" />
           </mxGeometry>
+        </mxCell>
+        <mxCell id="vWnuXFx7iVDM5a5PLiHu-38" value="Зайти в терминал устройства" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="390" y="1000" width="120" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="vWnuXFx7iVDM5a5PLiHu-40" value="получение даннных?" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="380" y="545" width="120" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="vWnuXFx7iVDM5a5PLiHu-41" value="получение даннных?" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="380" y="465" width="120" height="80" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
