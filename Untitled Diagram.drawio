@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2021-11-28T11:52:47.396Z" agent="5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.114 Safari/537.36" etag="EYkJUHrJg-NEz7I92YQ6" version="15.8.3" type="github">
+<mxfile host="app.diagrams.net" modified="2021-11-28T12:30:17.467Z" agent="5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.114 Safari/537.36" etag="kK1r4QeSTLdHD-JsgbQ0" version="15.8.3" type="github">
   <diagram id="C5RBs43oDa-KdzZeNtuy" name="Page-1">
     <mxGraphModel dx="1896" dy="969" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -185,6 +185,33 @@
         </mxCell>
         <mxCell id="vWnuXFx7iVDM5a5PLiHu-62" value="если это сервер, то нагрузка процессора, использование сети, логи, дисковое пространство" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
           <mxGeometry x="770" y="270" width="120" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="vWnuXFx7iVDM5a5PLiHu-67" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="vWnuXFx7iVDM5a5PLiHu-64" target="vWnuXFx7iVDM5a5PLiHu-66">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="vWnuXFx7iVDM5a5PLiHu-64" value="добавление машинного зала" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="230" y="930" width="120" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="vWnuXFx7iVDM5a5PLiHu-65" value="удаление машинного зала" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="230" y="1020" width="120" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="vWnuXFx7iVDM5a5PLiHu-66" value="добавление датчиков и их ip" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="480" y="970" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="vWnuXFx7iVDM5a5PLiHu-68" value="бд устройств из машинного зала" style="whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="1120" y="70" width="80" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="vWnuXFx7iVDM5a5PLiHu-69" value="ip устройств сети" style="whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="1120" y="200" width="80" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="vWnuXFx7iVDM5a5PLiHu-70" value="ip бесперебойников" style="whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="1120" y="320" width="80" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="vWnuXFx7iVDM5a5PLiHu-71" value="ip устройств питания" style="whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="1120" y="450" width="80" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="vWnuXFx7iVDM5a5PLiHu-72" value="ip камер" style="whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="1120" y="560" width="80" height="80" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
