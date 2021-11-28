@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2021-11-28T08:58:23.550Z" agent="5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.114 Safari/537.36" etag="64mTBVRAOjuml9OuvKj3" version="15.8.3" type="github">
+<mxfile host="app.diagrams.net" modified="2021-11-28T11:52:47.396Z" agent="5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.114 Safari/537.36" etag="EYkJUHrJg-NEz7I92YQ6" version="15.8.3" type="github">
   <diagram id="C5RBs43oDa-KdzZeNtuy" name="Page-1">
     <mxGraphModel dx="1896" dy="969" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -16,7 +16,7 @@
         <mxCell id="vWnuXFx7iVDM5a5PLiHu-18" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="vWnuXFx7iVDM5a5PLiHu-2" target="vWnuXFx7iVDM5a5PLiHu-6">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="vWnuXFx7iVDM5a5PLiHu-2" value="Просмотр топологии всей сети" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+        <mxCell id="vWnuXFx7iVDM5a5PLiHu-2" value="Просмотр топологии всей сети(для этого должен быть известен диапазон адресов для скана)" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
           <mxGeometry x="200" y="160" width="160" height="60" as="geometry" />
         </mxCell>
         <mxCell id="vWnuXFx7iVDM5a5PLiHu-53" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="vWnuXFx7iVDM5a5PLiHu-3" target="vWnuXFx7iVDM5a5PLiHu-52">
@@ -25,8 +25,14 @@
         <mxCell id="vWnuXFx7iVDM5a5PLiHu-3" value="Критические ситуации" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
           <mxGeometry x="160" y="740" width="160" height="60" as="geometry" />
         </mxCell>
+        <mxCell id="vWnuXFx7iVDM5a5PLiHu-59" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="vWnuXFx7iVDM5a5PLiHu-4" target="vWnuXFx7iVDM5a5PLiHu-40">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
         <mxCell id="vWnuXFx7iVDM5a5PLiHu-4" value="Просмотр схемы электроснабжения" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
           <mxGeometry x="170" y="540" width="160" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="vWnuXFx7iVDM5a5PLiHu-58" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="vWnuXFx7iVDM5a5PLiHu-5" target="vWnuXFx7iVDM5a5PLiHu-41">
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="vWnuXFx7iVDM5a5PLiHu-5" value="Просмотр состояния работы бесперебойников" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
           <mxGeometry x="170" y="460" width="160" height="60" as="geometry" />
@@ -66,8 +72,11 @@
         <mxCell id="vWnuXFx7iVDM5a5PLiHu-19" value="Изменение топологии сети" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
           <mxGeometry x="200" y="840" width="160" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="vWnuXFx7iVDM5a5PLiHu-20" value="Отключение устройства от сети" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+        <mxCell id="vWnuXFx7iVDM5a5PLiHu-20" value="Отключение устройства от сети(удаление его ip из бд)" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
           <mxGeometry x="730" y="790" width="140" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="vWnuXFx7iVDM5a5PLiHu-61" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="vWnuXFx7iVDM5a5PLiHu-21" target="vWnuXFx7iVDM5a5PLiHu-60">
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="vWnuXFx7iVDM5a5PLiHu-21" value="Добавление устройства в сеть" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
           <mxGeometry x="730" y="900" width="150" height="60" as="geometry" />
@@ -127,7 +136,7 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="vWnuXFx7iVDM5a5PLiHu-40" value="получение даннных получение данных по SNMP обо всех устройствах питания" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
-          <mxGeometry x="380" y="545" width="120" height="80" as="geometry" />
+          <mxGeometry x="414" y="535" width="120" height="80" as="geometry" />
         </mxCell>
         <mxCell id="vWnuXFx7iVDM5a5PLiHu-41" value="получение даннных по SNMP обо всех бесперебойниках&amp;nbsp;" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
           <mxGeometry x="390" y="450" width="120" height="80" as="geometry" />
@@ -144,16 +153,16 @@
             <mxPoint x="600" y="90" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="vWnuXFx7iVDM5a5PLiHu-45" value="" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+        <mxCell id="vWnuXFx7iVDM5a5PLiHu-45" value="SNMP сканирование диапазона адресов, построение графа по результатам сканирования" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
           <mxGeometry x="430" y="160" width="120" height="80" as="geometry" />
         </mxCell>
-        <mxCell id="vWnuXFx7iVDM5a5PLiHu-46" value="просмотр температуры, cpu, состояния линков и другой доп инфы" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+        <mxCell id="vWnuXFx7iVDM5a5PLiHu-46" value="просмотр температуры, логов, cpu, состояния линков и другой доп инфы" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
           <mxGeometry x="540" y="270" width="120" height="80" as="geometry" />
         </mxCell>
         <mxCell id="vWnuXFx7iVDM5a5PLiHu-50" value="получение изображений видеокамер" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
           <mxGeometry x="430" y="640" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="vWnuXFx7iVDM5a5PLiHu-52" value="уведомление о падении линка, о критической температуре конкретного устройства, о слишком нагруженном канале SNMP trap" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+        <mxCell id="vWnuXFx7iVDM5a5PLiHu-52" value="уведомление о падении линка, о критической температуре конкретного устройства, о слишком нагруженном канале , о проблемах с дисковым пространством - SNMP trap" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
           <mxGeometry x="941" y="660" width="300" height="100" as="geometry" />
         </mxCell>
         <mxCell id="vWnuXFx7iVDM5a5PLiHu-54" value="" style="endArrow=classic;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="vWnuXFx7iVDM5a5PLiHu-6" target="vWnuXFx7iVDM5a5PLiHu-46">
@@ -168,8 +177,14 @@
             <mxPoint x="630" y="450" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="vWnuXFx7iVDM5a5PLiHu-56" value="расширение для админа-&amp;nbsp; зайти в терминал конкретного устройства" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+        <mxCell id="vWnuXFx7iVDM5a5PLiHu-56" value="расширение для админа-&amp;nbsp; зайти в терминал конкретного устройства через telnet/ssh" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
           <mxGeometry x="640" y="370" width="120" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="vWnuXFx7iVDM5a5PLiHu-60" value="задание его ip для дальнейшего отслеживания в бд" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="975" y="900" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="vWnuXFx7iVDM5a5PLiHu-62" value="если это сервер, то нагрузка процессора, использование сети, логи, дисковое пространство" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="770" y="270" width="120" height="80" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
