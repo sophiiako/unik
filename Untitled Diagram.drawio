@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2021-11-28T12:30:17.467Z" agent="5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.114 Safari/537.36" etag="kK1r4QeSTLdHD-JsgbQ0" version="15.8.3" type="github">
+<mxfile host="app.diagrams.net" modified="2021-11-28T13:28:48.727Z" agent="5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.114 Safari/537.36" etag="RRVi40JV7WE1FlafYku6" version="15.8.3" type="github">
   <diagram id="C5RBs43oDa-KdzZeNtuy" name="Page-1">
     <mxGraphModel dx="1896" dy="969" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -135,8 +135,14 @@
             <mxPoint x="440" y="360" as="targetPoint" />
           </mxGeometry>
         </mxCell>
+        <mxCell id="vWnuXFx7iVDM5a5PLiHu-76" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="vWnuXFx7iVDM5a5PLiHu-40" target="vWnuXFx7iVDM5a5PLiHu-75">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
         <mxCell id="vWnuXFx7iVDM5a5PLiHu-40" value="получение даннных получение данных по SNMP обо всех устройствах питания" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
           <mxGeometry x="414" y="535" width="120" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="vWnuXFx7iVDM5a5PLiHu-74" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="vWnuXFx7iVDM5a5PLiHu-41" target="vWnuXFx7iVDM5a5PLiHu-73">
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="vWnuXFx7iVDM5a5PLiHu-41" value="получение даннных по SNMP обо всех бесперебойниках&amp;nbsp;" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
           <mxGeometry x="390" y="450" width="120" height="80" as="geometry" />
@@ -212,6 +218,12 @@
         </mxCell>
         <mxCell id="vWnuXFx7iVDM5a5PLiHu-72" value="ip камер" style="whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
           <mxGeometry x="1120" y="560" width="80" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="vWnuXFx7iVDM5a5PLiHu-73" value="ток, температура, напряжение" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="590" y="460" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="vWnuXFx7iVDM5a5PLiHu-75" value="темпа, напряжение на входе, напряжение на выходе, ток на входе, ток на выходе" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="614" y="545" width="120" height="60" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
