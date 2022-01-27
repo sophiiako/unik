@@ -1,100 +1,126 @@
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Service {
-    private static final DBConnector db = new DBConnector();
-    private static final Request request = new Request(db);
+    private DBConnector db;
+    private Request request;
     public Devices devices;
-    private Info info;
-    public Filter filter;
+    private DefaultTableModel table;
+    public selectFilter filter;
+    public boolean sortEarlier;
+    private static final String[] tableColumns = {"name", "md5", "platform", "date", "branch", "stage"};
 
 
     public Service() {
-        createAllElements();
+        initAllElements();
     }
 
-    private void createAllElements() {
+    public void finish() {
+        db.release();
+    }
+
+    public  List<String> getAllPlatforms() {
+        return devices.allDevices();
+    }
+
+    private void createTable() {
+        for (String column: tableColumns) {
+            table.addColumn(column);
+        }
+    }
+
+    public DefaultTableModel getTable() {
+        return table;
+    }
+
+    public Request getRequest() {
+        return request;
+    }
+
+    private void initAllElements() {
+        sortEarlier = false;
+        db = DBConnector.getInstance();
+        db.connect();
+        request = new Request(db);
+
+        // для того чтобы таблица не была редактируема
+        table = new DefaultTableModel() {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
+
+        createTable();
+
         devices = new Devices();
-        info = new Info();
-        filter = new Filter();
+        filter = new selectFilter(devices.allDevices());
     }
 
-
-    public String getInfoToPanel(String name) {
-        return info.changeData(getAllFirmwareData(name));
+    public void changeSortAction(boolean newSortEarlier) {
+        sortEarlier = newSortEarlier;
     }
 
-    public String resetInfoPanel(){
-        return info.initialPanel();
-    }
-
-    public List<String> sortItems(String action) {
-        List<FirmwareElement> result = request.tempRequestToGetAllDates();
-
-        List<FirmwareElement> sortedResult = (new Sort()).sortElements(result);
-
+    public DefaultTableModel showItems() {
+        // метод получает список всех прошивок из БД, сортирует их и возвращает отсортированную модель таблицы
+        List<FirmwareElement> result = request.createDataRequest(filter);
         List<String> newModel = new ArrayList<String>();
-        if (action == "latest first") {
+        if (!sortEarlier) {
 
             //преобразовать список наоборот
             System.out.println("sort latest");
-
-            for (int i = sortedResult.size() - 1; i > -1; i--){
-                newModel.add(sortedResult.get(i).name);
+            table.setRowCount(0);
+            for (int i = result.size() - 1; i > -1; --i){
+                table.insertRow(result.size() - i -1, new Object[]{result.get(i).name, result.get(i).md5,
+                        result.get(i).platform, result.get(i).date.resultDate, result.get(i).branch,
+                        result.get(i).stage});
             }
 
         }
-        else if (action == "earliest first"){
+        else {
             System.out.println("sort early");
-            for(FirmwareElement n: sortedResult) {
-                newModel.add(n.name);
+            table.setRowCount(0);
+            for (int i = 0; i < result.size(); ++i) {
+                table.insertRow(i, new Object[]{result.get(i).name, result.get(i).md5,
+                        result.get(i).platform, result.get(i).date.resultDate, result.get(i).branch,
+                        result.get(i).stage});
             }
         }
 
-        return newModel;
+        return table;
     }
 
-    public void changeFilters(Filter newFilter) {
-
+    public void changeFilters(selectFilter newFilter) {
+        filter = newFilter;
         System.out.println("Change filters and update");
-        searchFirmwareWithFilters(newFilter);
+        request.createDataRequest(newFilter);
+    }
+
+    public selectFilter getCurrentFilter () {
+        return filter;
     }
 
     public void addNewFirmware(FirmwareElement newFirmware) {
-        System.out.println("add firmware with elements " + newFirmware.platform + " " + newFirmware.version);
-        // create request  to add firmware TODO
+        System.out.println("add firmware with elements " + newFirmware.platform + " " + newFirmware.date.resultDate);
+        // check return TODO
         request.createAddRequest(newFirmware);
     }
 
-    public void editFirmwareData(String name) {
+    public void editFirmwareData(Integer columnIndex) {
 
         System.out.println("edit firmware");
         // create request  to edit firmware TODO
         request.createEditRequest();
     }
 
-    private void searchFirmwareWithFilters(Filter filter) {
-
-        System.out.println("search");
-        // create request  to search firmware TODO
-        //return kuda to
-        request.createSearchRequest();
-    }
-
-    public void deleteFirmware(String name) {
+    public void deleteFirmware(String md5) {
 
         System.out.println("delete soon");
-        // create request  to delete firmware TODO
-        request.createDeleteRequest(name);
-    }
-
-    private String getAllFirmwareData(String name) {
-
-        System.out.println("get all data from db");
-        // create request  to search concrete firmware TODO
-        return request.createSearchRequestByName(name);
+        // check return TODO
+        request.createDeleteRequest(md5);
     }
 
     public void addAvailableDevice(String element) {

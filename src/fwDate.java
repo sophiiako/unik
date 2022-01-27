@@ -3,16 +3,18 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class Date {
+public class fwDate {
     private static final Integer[] daysInMonth = {31, 0, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
-    private static String datePattern = "(\\d+)\\.(\\d+)\\.(\\d+)";
+    private static final String datePattern = "(\\d+)\\-(\\d+)\\-(\\d+)";
     private int Day;
     private int Month;
     private int Year;
     public String resultDate;
     private boolean validity;
+    private static final String dateMinString = "2017-01-01";
+    private static final String dateMaxString = "2022-12-31";
 
-    public Date(int day, int month, int year) {
+    public fwDate(int day, int month, int year) {
         if (check()) {
             validity = true;
         } else {
@@ -21,7 +23,7 @@ public class Date {
         resultDate = dateToString();
     }
 
-    public Date(String date) {
+    public fwDate(String date) {
         if (parseString(date)) {
             validity = true;
         } else {
@@ -30,7 +32,15 @@ public class Date {
         resultDate = dateToString();
     }
 
-    public int compareTo(Date d) {
+    public fwDate getDateMax () {
+        return new fwDate(dateMaxString);
+    }
+
+    public fwDate getDateMin () {
+        return new fwDate(dateMinString);
+    }
+
+    public int compareTo(fwDate d) {
         // like string
         // like >
         // if == returns 0
@@ -59,9 +69,9 @@ public class Date {
         Pattern r = Pattern.compile(datePattern);
         Matcher m = r.matcher(date);
         if (m.find()) {
-            Day = Integer.parseInt(m.group(1));
+            Year = Integer.parseInt(m.group(1));
             Month = Integer.parseInt(m.group(2));
-            Year = Integer.parseInt(m.group(3));
+            Day = Integer.parseInt(m.group(3));
             if (check()) {
                 return true;
             }
@@ -76,25 +86,24 @@ public class Date {
 
     private String dateToString() {
         if (!validity) {return "";}
-        String result = "";
-        if (Day > 9) {
-            result += Integer.toString(Day) + ".";
-        }
-        else {
-            result +=  "0" + Integer.toString(Day) + ".";
-        }
+        String result =  Integer.toString(Year) + "-";
         if (Month > 9) {
-            result += Integer.toString(Month) + ".";
+            result += Integer.toString(Month) + "-";
         }
         else {
-            result +=  "0" + Integer.toString(Month) + ".";
+            result +=  "0" + Integer.toString(Month) + "-";
         }
-        result += Integer.toString(Year);
+        if (Day > 9) {
+            result += Integer.toString(Day) ;
+        }
+        else {
+            result +=  "0" + Integer.toString(Day) ;
+        }
         return result;
     }
 
     private boolean check() {
-        if (Year < 2017 || Year > 2021) {
+        if (Year < 2017 || Year > 2022) {
             return false;
         }
         if (Month < 1 || Month > 12) {
@@ -126,6 +135,6 @@ public class Date {
     }
 
     public static void main(String args[]) {
-       Date d = new Date("04.14.2030");
+        fwDate d = new fwDate("04.14.2030");
     }
 }

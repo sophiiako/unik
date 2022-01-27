@@ -42,7 +42,7 @@ public class Devices {
     }
 
     public void addNewDevice(String element) {
-        if (!isExist(element)) {
+        if (!isExist(element) && !element.equals("")) {
             usingDevices.add(element);
             try(FileWriter writer = new FileWriter(configFilename, true))
             {

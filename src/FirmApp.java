@@ -12,11 +12,8 @@ public class FirmApp {
         } catch(Exception ignored){}
         EventQueue.invokeLater(() -> {
 
-            var ex = new Gui(serviceUI,"The best application of your life!");
+            var ex = new Gui(serviceUI,"Choose your favorite firmware!");
             ex.setVisible(true);
-
-
-
 
         });
     }

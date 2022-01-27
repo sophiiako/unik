@@ -2,56 +2,66 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.*;
+import javax.swing.table.DefaultTableModel;
 
-public class NewFirmwareDialog  extends JDialog {
-    private Gui gui;
+
+public class NewFirmwareDialog  extends AddDialog {
     private JTextField nameField;
     private JTextField md5Field;
     private JTextField dateField;
     private JButton okButton;
     private JButton cancelButton;
     private JPanel mainFirmwarePanel;
-    private JTextField versionField;
+    private JTextField branchField;
     private JTextField platformField;
-    public Service serviceUI;
+    private JTextField stageField;
+    private JTextField firmwareField;
+    private JLabel firmwareLabel;
     public FirmwareElement tempFirmwareElement;
-    private DefaultListModel listModel;
+    private DefaultTableModel tableModel;
+    private static final String[] availableStages = {"release", "develop"};
 
-    public NewFirmwareDialog(DefaultListModel Model, Gui frame, Service serviceModule) {
-        super(frame, "New firmware", true);
-        gui = frame;
-        getRootPane().setDefaultButton(okButton);
-        listModel = Model;
+    public NewFirmwareDialog(DefaultTableModel Model, Gui frame, Service serviceModule) {
+        super(frame, "New firmware", serviceModule);
+
+        tableModel = Model;
         tempFirmwareElement = new FirmwareElement();
-        serviceUI = serviceModule;
-        Toolkit toolkit = Toolkit.getDefaultToolkit();
-        Dimension dimension = toolkit.getScreenSize();
-        setBounds(dimension.width / 2 - 250, dimension.height / 2 - 150, 500, 300);
-        InitDevicesDialog();
-        activateButtons();
+        InitDialog();
+
     }
 
-    private void InitDevicesDialog() {
-        //JPanel mainDevicesPanel = new JPanel();
-        //mainDevicesPanel.setLayout(new GridBagLayout());
+    private void InitDialog() {
         setContentPane(mainFirmwarePanel);
-        //GridBagConstraints constraints = new GridBagConstraints();
+        activateButtons();
+        getRootPane().setDefaultButton(okButton);
+    }
 
-
+    private boolean checkStage(String stage) {
+        for (int i = 0; i < availableStages.length; ++i) {
+            if (stage.equals(availableStages[i])) {
+                return true;
+            }
+        }
+        return false;
     }
 
     private String checkTextFieldsData(FirmwareElement temp) {
         // returns error msg
-        if (temp.version.equals("") ||  temp.platform.equals("") ||
-                                                                   temp.md5.equals("") || temp.name.equals("")) {
+        if (temp.branch.equals("") ||  temp.platform.equals("") ||
+                temp.md5.equals("") || temp.name.equals("")
+                || temp.date.equals("") || temp.stage.equals("")) {
             return "Error. Not enough arguments. Specify all fields!";
         }
         if (temp.date.resultDate.equals("")) {
-            return "Date format is wrong. Format must be [day.month.year]. Also year can be only 2017-2021. Check it.";
+            return "Date format is wrong. Format must be [dd.mm.yyyy]. Also year can be only 2017-2022. Check it.";
+        }
+        if (!checkStage(temp.stage)) {
+            return "Stage can be only \'release\' or \'develop\'. Isn\'t it?";
         }
 
         if (!(new Devices()).isExist(temp.platform)) {
-            return "This platform doesn\'t exist in available devices. If this platform is really exist, Add it.";
+            return "This platform doesn\'t exist in available devices. If this platform is really exist, add it.";
         }
         return "";
     }
@@ -59,20 +69,33 @@ public class NewFirmwareDialog  extends JDialog {
     private String createNewFirmwareElement() {
         // returns error msg
         tempFirmwareElement.name = nameField.getText();
-        nameField.setText("");
         tempFirmwareElement.md5 = md5Field.getText();
-        md5Field.setText("");
-        tempFirmwareElement.date = new Date(dateField.getText());
-        dateField.setText("");
-        tempFirmwareElement.version = versionField.getText();
-        versionField.setText("");
+        tempFirmwareElement.date = new fwDate(dateField.getText());
+        tempFirmwareElement.stage = stageField.getText();
+        tempFirmwareElement.branch = branchField.getText();
         tempFirmwareElement.platform = platformField.getText();
-        platformField.setText("");
-        String errorMsg = checkTextFieldsData(tempFirmwareElement);
 
+        // проверка полей данных
+        String errorMsg = checkTextFieldsData(tempFirmwareElement);
         if (!errorMsg.equals("")) {
-            tempFirmwareElement.goToInitialValues();
+            return errorMsg;
         }
+
+        String binDataFile = firmwareField.getText();
+
+        // попытка открыть бинарник и прочесть его
+
+        try {
+            File file = new File(binDataFile);
+            FileInputStream fin = new FileInputStream(binDataFile);
+            byte[] firmwareBytes = new byte[(int)file.length()];
+            firmwareBytes = fin.readNBytes((int)file.length());
+            tempFirmwareElement.setBinData(firmwareBytes);
+        }
+        catch (IOException ioEx) {
+            errorMsg = "Cannot read file with firmware because" + ioEx;
+        }
+
         return errorMsg;
     }
 
@@ -83,10 +106,12 @@ public class NewFirmwareDialog  extends JDialog {
                 String errMsg = createNewFirmwareElement();
                 if (errMsg.equals("")) {
                     serviceUI.addNewFirmware(tempFirmwareElement);
-                    listModel.addElement(tempFirmwareElement.name);
+                    tableModel.insertRow(0, new Object[]{tempFirmwareElement.name,
+                            tempFirmwareElement.md5, tempFirmwareElement.platform, tempFirmwareElement.date,
+                            tempFirmwareElement.branch, tempFirmwareElement.stage});
 
                     // sort list panel
-                    gui.loadFirmwareList();
+                    gui.loadFirmwareTable();
 
                     dispose();
                 }

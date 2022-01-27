@@ -8,20 +8,18 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 
-public class DevicesDialog extends JDialog {
+public class DevicesDialog extends AddDialog {
 
     private JPanel mainDevicesPanel;
     private JTextField devField;
     private JButton AddButton;
     private JList devList;
-    private  Service serviceUI;
 
 
-    public DevicesDialog(Gui frame, Service serviceModel) {
-        super(frame, "Available platforms", true);
-        getRootPane().setDefaultButton(AddButton);
-        serviceUI = serviceModel;
-        InitDevicesDialog();
+    public DevicesDialog(Gui frame, Service serviceModule) {
+        super(frame, "Available platforms", serviceModule);
+
+        InitDialog();
     }
 
     private void updatePanel() {
@@ -33,12 +31,10 @@ public class DevicesDialog extends JDialog {
         devList.setModel(listModel);
     }
 
-    private void InitDevicesDialog() {
-        Toolkit toolkit = Toolkit.getDefaultToolkit();
-        Dimension dimension = toolkit.getScreenSize();
-        setBounds(dimension.width / 2 - 250, dimension.height / 2 - 150, 500, 300);
+    private void InitDialog() {
         updatePanel();
         ActivateButton();
+        getRootPane().setDefaultButton(AddButton);
         setContentPane(mainDevicesPanel);
     }
 
